@@ -32,6 +32,12 @@ export type DatabaseConfig = {
 	cert?: string;
 };
 
+export type MqttConfig = {
+	url?: string;
+	username?: string;
+	password?: string;
+};
+
 export type MailConfig = {
 	port: number;
 	host?: string;
@@ -48,5 +54,6 @@ export type AllConfigType = {
 	app: AppConfig;
 	auth: AuthConfig;
 	database: DatabaseConfig;
+	mqtt: MqttConfig;
 	mail: MailConfig;
 };

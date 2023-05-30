@@ -58,13 +58,12 @@ async function bootstrap(): Promise<void> {
 	app.use(helmet());
 
 	// Hybrid application # https://docs.nestjs.com/faq/hybrid-application#hybrid-application
-	// TODO: Store the MQTT broker URL, username, and password in a configuration file or environment variables specific to your production environment.
 	app.connectMicroservice({
 		transport: Transport.MQTT,
 		options: {
-			url: 'mqtt://34.28.231.254:1883',
-			username: 'user001',
-			password: '123123',
+			url: configService.getOrThrow('mqtt.url', { infer: true }),
+			username: configService.getOrThrow('mqtt.username', { infer: true }),
+			password: configService.getOrThrow('mqtt.password', { infer: true }),
 		},
 	});
 
