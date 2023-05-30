@@ -1,0 +1,10 @@
+{
+	"prettier.printWidth": 140,
+	"prettier.singleQuote": true,
+	"prettier.useEditorConfig": false,
+	"prettier.useTabs": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}
