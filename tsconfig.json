@@ -1,38 +1,33 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      // https://docs.nestjs.com/cli/scripts#build
-      // https://nodejs.org/api/packages.html#imports
-      "#entity/*": ["./src/entity/*"]
-    },
-    "target": "ES2019",
-    "outDir": "./dist",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "incremental": true,
-    "declaration": true,
-    "newLine": "lf",
-    "strict": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "verbatimModuleSyntax": false,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "removeComments": true,
-    "sourceMap": true,
-    "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
-    // "noImplicitAny": false,
-    // "strictNullChecks": false,
-    // "strictBindCallApply": false
-  }
+	"compilerOptions": {
+		"module": "commonjs",
+		"declaration": true,
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"target": "ES2019",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"baseUrl": "./",
+		"incremental": true,
+		"skipLibCheck": true,
+		"strictNullChecks": true,
+		"noImplicitAny": false,
+		"strictBindCallApply": false,
+		"forceConsistentCasingInFileNames": false,
+		"noFallthroughCasesInSwitch": false,
+		"moduleResolution": "node",
+		"newLine": "lf",
+		// "strict": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"verbatimModuleSyntax": false,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"esModuleInterop": true
+	}
 }
