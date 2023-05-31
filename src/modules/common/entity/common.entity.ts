@@ -14,7 +14,7 @@ export class Common {
 	 * @type {number}
 	 */
 	@PrimaryColumn({ type: 'uuid', default: uuidv4() })
-	id!: string;
+	id: string;
 
 	/**
 	 * The ID of the user who created the entity.
@@ -22,7 +22,7 @@ export class Common {
 	 * @type {number}
 	 */
 	@Column({ type: 'bigint', nullable: true, default: null })
-	created_by!: number;
+	created_by: number;
 
 	/**
 	 * The date and time the entity was created.
@@ -30,7 +30,7 @@ export class Common {
 	 * @type {Date}
 	 */
 	@CreateDateColumn({ type: 'timestamp with time zone', nullable: false })
-	created_at!: Date;
+	created_at: Date;
 
 	/**
 	 * The ID of the user who last modified the entity.
@@ -38,7 +38,7 @@ export class Common {
 	 * @type {number}
 	 */
 	@Column({ type: 'bigint', nullable: true, default: null })
-	modified_by!: number;
+	modified_by: number;
 
 	/**
 	 * The date and time the entity was last modified.
@@ -46,5 +46,5 @@ export class Common {
 	 * @type {Date}
 	 */
 	@UpdateDateColumn({ type: `timestamp with time zone`, nullable: true, default: null })
-	modified_at!: Date;
+	modified_at: Date;
 }
