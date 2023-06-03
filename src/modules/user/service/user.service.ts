@@ -1,14 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
 import { DeepPartial, Repository } from 'typeorm';
 
 import { IPaginationOptions } from '../../common/utils/interface';
-import { EntityCondition } from '../../common/utils/types';
+import { EntityCondition, NullableType } from '../../common/utils/types';
 
-import { CreateUserDTO } from '../dto';
 import { User } from '../entity';
-import { NullableType } from '../../common/utils/types';
+import { CreateUserDTO } from '../dto';
 
 @Injectable()
 export class UserService {
@@ -41,5 +39,9 @@ export class UserService {
 				...updateArgs,
 			})
 		);
+	}
+
+	async softDelete(id: string): Promise<void> {
+		await this.usersRepository.softDelete(id);
 	}
 }

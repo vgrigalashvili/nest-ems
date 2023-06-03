@@ -22,6 +22,7 @@
 		"test:e2e": "jest --config ./test/jest-e2e.json"
 	},
 	"dependencies": {
+		"@nestjs-modules/mailer": "^1.8.1",
 		"@nestjs/common": "^9.4.2",
 		"@nestjs/config": "^2.3.2",
 		"@nestjs/core": "^9.4.2",
@@ -39,6 +40,7 @@
 		"helmet": "^7.0.0",
 		"moment-timezone": "^0.5.43",
 		"mqtt": "^4.3.7",
+		"nestjs-i18n": "^10.2.6",
 		"passport": "^0.6.0",
 		"passport-jwt": "^4.0.1",
 		"passport-local": "^1.0.0",

@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { EntityHelper } from '../utils';
 
 /**
  * This module exports the [Common] class, which is used to define the common fields for all entities in the system.
@@ -7,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
  * the user who last modified the entity, and the date and time it was last modified.
  *
  */
-export class Common {
+export class Common extends EntityHelper {
 	/**
 	 * The ID of the entity.
 	 *

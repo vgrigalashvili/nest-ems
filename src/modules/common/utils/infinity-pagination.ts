@@ -1,4 +1,6 @@
-import { IPaginationOptions, InfinityPaginationResultType } from './types';
+import { IPaginationOptions } from './interface';
+
+import { InfinityPaginationResultType } from './types';
 
 export const infinityPagination = <T>(data: T[], options: IPaginationOptions): InfinityPaginationResultType<T> => {
 	return {

@@ -12,11 +12,10 @@ import {
 	HttpStatus,
 	HttpCode,
 	SerializeOptions,
+	Delete,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-
-import { User } from '../entity';
 
 import { CreateUserDTO, UpdateUserDTO } from '../dto';
 
@@ -24,18 +23,19 @@ import { Role } from '../../common/role/decorator';
 import { RoleEnum } from '../../common/role/enum';
 import { RoleGuard } from '../../common/role/guard';
 
-import { InfinityPaginationResultType } from '../../common/utils/types';
-import { NullableType } from '../../common/utils/types';
+import { InfinityPaginationResultType, NullableType } from '../../common/utils/types';
+
 import { infinityPagination } from '../../common/utils/infinity-pagination';
 
+import { User } from '../entity';
 import { UserService } from '../service';
 
 @ApiBearerAuth()
 @Role(RoleEnum.admin)
 @UseGuards(AuthGuard('jwt'), RoleGuard)
-@ApiTags('Users')
+@ApiTags('User')
 @Controller({
-	path: 'users',
+	path: 'user',
 	version: '1',
 })
 export class UserController {
@@ -46,8 +46,8 @@ export class UserController {
 	})
 	@Post()
 	@HttpCode(HttpStatus.CREATED)
-	create(@Body() createProfileDto: CreateUserDTO): Promise<User> {
-		return this.userService.create(createProfileDto);
+	create(@Body() createProfileDTO: CreateUserDTO): Promise<User> {
+		return this.userService.create(createProfileDTO);
 	}
 
 	@SerializeOptions({
@@ -88,5 +88,11 @@ export class UserController {
 	@HttpCode(HttpStatus.OK)
 	update(@Param('id') id: string, @Body() updateUserArgs: UpdateUserDTO): Promise<User> {
 		return this.userService.update(id, updateUserArgs);
+	}
+
+	@Delete(':id')
+	@HttpCode(HttpStatus.NO_CONTENT)
+	remove(@Param('id') id: string): Promise<void> {
+		return this.userService.softDelete(id);
 	}
 }
