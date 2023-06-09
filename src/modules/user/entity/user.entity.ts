@@ -20,6 +20,28 @@ export class User extends Common {
 	@Exclude({ toPlainOnly: true })
 	password: string;
 
+	@Column({ type: 'varchar', nullable: false })
+	firstName: string;
+
+	@Column({ type: 'varchar', nullable: false })
+	lastName: string;
+
+	@Column({ type: 'varchar', length: 9, nullable: true })
+	mobile: string;
+
+	@Column({ default: AuthProvidersEnum.email })
+	@Expose({ groups: ['me', 'admin'] })
+	provider: string;
+
+	@Column({ type: 'boolean', default: false, nullable: false })
+	@Expose({ groups: ['me', 'admin'] })
+	mail_verified: boolean;
+
+	@Column({ type: String, nullable: true })
+	@Index()
+	@Exclude({ toPlainOnly: true })
+	hash: string | null;
+
 	@Exclude({ toPlainOnly: true })
 	public previousPassword: string;
 
@@ -36,22 +58,4 @@ export class User extends Common {
 			this.password = await bcrypt.hash(this.password, salt);
 		}
 	}
-
-	@Column({ default: AuthProvidersEnum.email })
-	@Expose({ groups: ['me', 'admin'] })
-	provider: string;
-
-	@Column({ type: 'varchar', nullable: false })
-	firstName: string;
-
-	@Column({ type: 'varchar', nullable: false })
-	lastName: string;
-
-	@Column({ type: 'varchar', length: 9, nullable: true })
-	mobile: string;
-
-	@Column({ type: String, nullable: true })
-	@Index()
-	@Exclude({ toPlainOnly: true })
-	hash: string | null;
 }

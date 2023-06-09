@@ -2,7 +2,7 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { ClassSerializerInterceptor, ValidationPipe, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Transport } from '@nestjs/microservices';
+// import { Transport } from '@nestjs/microservices';
 import { json } from 'express';
 import helmet from 'helmet';
 
@@ -46,7 +46,7 @@ async function bootstrap(): Promise<void> {
 
 	const options = new DocumentBuilder()
 		.setTitle('EMS')
-		.setDescription('EMS: `Elevator Management System`')
+		.setDescription('`Elevator Management System`')
 		.setVersion(version)
 		.addBearerAuth()
 		.build();
@@ -58,17 +58,17 @@ async function bootstrap(): Promise<void> {
 	app.use(helmet());
 
 	// Hybrid application # https://docs.nestjs.com/faq/hybrid-application#hybrid-application
-	app.connectMicroservice({
-		transport: Transport.MQTT,
-		options: {
-			url: configService.getOrThrow('mqtt.url', { infer: true }),
-			username: configService.getOrThrow('mqtt.username', { infer: true }),
-			password: configService.getOrThrow('mqtt.password', { infer: true }),
-		},
-	});
+	// app.connectMicroservice({
+	// 	transport: Transport.MQTT,
+	// 	options: {
+	// 		url: configService.getOrThrow('mqtt.url', { infer: true }),
+	// 		username: configService.getOrThrow('mqtt.username', { infer: true }),
+	// 		password: configService.getOrThrow('mqtt.password', { infer: true }),
+	// 	},
+	// });
 
-	await app.startAllMicroservices();
-
+	// await app.startAllMicroservices();
+	console.log(configService.getOrThrow('app.port', { infer: true }));
 	await app.listen(configService.getOrThrow('app.port', { infer: true }));
 }
 void bootstrap();

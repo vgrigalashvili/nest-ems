@@ -10,7 +10,7 @@ export class Forgot extends Common {
 	id: number;
 
 	@Allow()
-	@Column({ type: 'text', nullable: false })
+	@Column({ type: String, nullable: false })
 	@Index()
 	hash: string;
 

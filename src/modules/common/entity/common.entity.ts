@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
 
 import { EntityHelper } from '../utils';
 
@@ -14,4 +14,7 @@ export class Common extends EntityHelper {
 
 	@UpdateDateColumn({ type: `timestamp with time zone`, nullable: true, default: null })
 	modified_at: Date;
+
+	@DeleteDateColumn()
+	deleted_at: Date;
 }
