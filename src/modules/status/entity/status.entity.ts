@@ -1,16 +1,17 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Allow } from 'class-validator';
-import { EntityHelper } from '../../utils';
+
+import { EntityHelper } from '../../common/utils';
 
 @Entity()
-export class Role extends EntityHelper {
+export class Status extends EntityHelper {
 	@ApiProperty({ example: 1 })
 	@PrimaryColumn()
 	id: number;
 
 	@Allow()
-	@ApiProperty({ example: 'Admin' })
+	@ApiProperty({ example: 'Active' })
 	@Column()
 	name?: string;
 }

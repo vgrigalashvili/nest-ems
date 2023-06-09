@@ -22,7 +22,7 @@ import { NullableType } from '../../common/utils/types';
 	version: '1',
 })
 export class AuthController {
-	constructor(private readonly service: AuthService) {}
+	constructor(private readonly authService: AuthService) {}
 
 	@SerializeOptions({
 		groups: ['me'],
@@ -30,7 +30,7 @@ export class AuthController {
 	@Post('email/login')
 	@HttpCode(HttpStatus.OK)
 	public login(@Body() loginDTO: AuthEmailLoginDTO): Promise<LoginResponseType> {
-		return this.service.validateLogin(loginDTO, false);
+		return this.authService.validateLogin(loginDTO);
 	}
 
 	@SerializeOptions({
@@ -39,31 +39,31 @@ export class AuthController {
 	@Post('admin/email/login')
 	@HttpCode(HttpStatus.OK)
 	public adminLogin(@Body() loginDTO: AuthEmailLoginDTO): Promise<LoginResponseType> {
-		return this.service.validateLogin(loginDTO, true);
+		return this.authService.validateLogin(loginDTO);
 	}
 
 	@Post('email/register')
 	@HttpCode(HttpStatus.NO_CONTENT)
 	async register(@Body() createUserDTO: AuthRegisterLoginDTO): Promise<void> {
-		return this.service.register(createUserDTO);
+		return this.authService.register(createUserDTO);
 	}
 
 	@Post('email/confirm')
 	@HttpCode(HttpStatus.NO_CONTENT)
 	async confirmEmail(@Body() confirmEmailDto: AuthConfirmEmailDTO): Promise<void> {
-		return this.service.confirmEmail(confirmEmailDto.hash);
+		return this.authService.confirmEmail(confirmEmailDto.hash);
 	}
 
 	@Post('forgot/password')
 	@HttpCode(HttpStatus.NO_CONTENT)
 	async forgotPassword(@Body() forgotPasswordDto: AuthForgotPasswordDTO): Promise<void> {
-		return this.service.forgotPassword(forgotPasswordDto.email);
+		return this.authService.forgotPassword(forgotPasswordDto.email);
 	}
 
 	@Post('reset/password')
 	@HttpCode(HttpStatus.NO_CONTENT)
 	resetPassword(@Body() resetPasswordDto: AuthResetPasswordDTO): Promise<void> {
-		return this.service.resetPassword(resetPasswordDto.hash, resetPasswordDto.password);
+		return this.authService.resetPassword(resetPasswordDto.hash, resetPasswordDto.password);
 	}
 
 	@ApiBearerAuth()
@@ -74,7 +74,7 @@ export class AuthController {
 	@UseGuards(AuthGuard('jwt'))
 	@HttpCode(HttpStatus.OK)
 	public me(@Request() request: Request & { user: User }): Promise<NullableType<User>> {
-		return this.service.me(request.user);
+		return this.authService.me(request.user);
 	}
 
 	@ApiBearerAuth()
@@ -85,14 +85,14 @@ export class AuthController {
 	@UseGuards(AuthGuard('jwt'))
 	@HttpCode(HttpStatus.OK)
 	public update(@Request() request: Request & { user: User }, @Body() updateArgs: AuthUpdateDTO): Promise<NullableType<User>> {
-		return this.service.update(request.user, updateArgs);
+		return this.authService.update(request.user, updateArgs);
 	}
 
 	@ApiBearerAuth()
 	@Delete('me')
 	@UseGuards(AuthGuard('jwt'))
 	@HttpCode(HttpStatus.NO_CONTENT)
-	public async delete(@Request() request): Promise<void> {
-		return this.service.softDelete(request.user);
+	public async delete(@Request() request: Request & { user: User }): Promise<void> {
+		return this.authService.softDelete(request.user);
 	}
 }

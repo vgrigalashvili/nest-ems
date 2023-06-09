@@ -34,6 +34,8 @@ export class MailConfigService implements MailerOptionsFactory {
 						infer: true,
 					}),
 					'src',
+					'modules',
+					'common',
 					'mail',
 					'mail-templates'
 				),

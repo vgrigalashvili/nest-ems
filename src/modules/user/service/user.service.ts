@@ -12,29 +12,29 @@ import { CreateUserDTO } from '../dto';
 export class UserService {
 	constructor(
 		@InjectRepository(User)
-		private usersRepository: Repository<User>
+		private userRepo: Repository<User>
 	) {}
 
 	create(createUserArgs: CreateUserDTO): Promise<User> {
-		return this.usersRepository.save(this.usersRepository.create(createUserArgs));
+		return this.userRepo.save(this.userRepo.create(createUserArgs));
 	}
 
 	findManyWithPagination(paginationOptions: IPaginationOptions): Promise<User[]> {
-		return this.usersRepository.find({
+		return this.userRepo.find({
 			skip: (paginationOptions.page - 1) * paginationOptions.limit,
 			take: paginationOptions.limit,
 		});
 	}
 
 	findOne(fields: EntityCondition<User>): Promise<NullableType<User>> {
-		return this.usersRepository.findOne({
+		return this.userRepo.findOne({
 			where: fields,
 		});
 	}
 
 	update(id: string, updateArgs: DeepPartial<User>): Promise<User> {
-		return this.usersRepository.save(
-			this.usersRepository.create({
+		return this.userRepo.save(
+			this.userRepo.create({
 				id,
 				...updateArgs,
 			})
@@ -42,6 +42,6 @@ export class UserService {
 	}
 
 	async softDelete(id: string): Promise<void> {
-		await this.usersRepository.softDelete(id);
+		await this.userRepo.softDelete(id);
 	}
 }

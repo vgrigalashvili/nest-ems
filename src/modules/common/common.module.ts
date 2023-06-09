@@ -17,7 +17,6 @@ import mailConfig from './config/mail.config';
 import mqttConfig from './config/mqtt.config';
 
 import { AllConfigType } from './config/config.type';
-import { ForgotModule } from './forgot/forgot.module';
 
 @Module({
 	imports: [
@@ -61,7 +60,6 @@ import { ForgotModule } from './forgot/forgot.module';
 			inject: [ConfigService],
 		}),
 		MailModule,
-		ForgotModule,
 	],
 
 	providers: [],

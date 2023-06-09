@@ -1,15 +1,17 @@
-import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, Index, ManyToOne } from 'typeorm';
+import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, Index, PrimaryColumn } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 import * as bcrypt from 'bcryptjs';
 import { Exclude, Expose } from 'class-transformer';
 
 import { Common } from '../../common/entity';
 import { AuthProvidersEnum } from '../../auth/enum';
-import { Role } from '../../common/role/entity';
-import { Status } from '../../common/status/entity';
 
 @Entity()
 export class User extends Common {
+	@PrimaryColumn({ type: 'uuid', default: uuidv4() })
+	id: string;
+
 	@Index({ unique: true })
 	@Column({ type: String, unique: true, nullable: false })
 	email: string;
@@ -47,16 +49,6 @@ export class User extends Common {
 
 	@Column({ type: 'varchar', length: 9, nullable: true })
 	mobile: string;
-
-	@ManyToOne(() => Role, {
-		eager: true,
-	})
-	role?: Role | null;
-
-	@ManyToOne(() => Status, {
-		eager: true,
-	})
-	status?: Status;
 
 	@Column({ type: String, nullable: true })
 	@Index()

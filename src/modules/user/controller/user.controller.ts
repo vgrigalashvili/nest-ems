@@ -19,9 +19,9 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { CreateUserDTO, UpdateUserDTO } from '../dto';
 
-import { Role } from '../../common/role/decorator';
-import { RoleEnum } from '../../common/role/enum';
-import { RoleGuard } from '../../common/role/guard';
+import { Role } from '../../role/decorator';
+import { RoleEnum } from '../../role/enum';
+import { RoleGuard } from '../../role/guard';
 
 import { InfinityPaginationResultType, NullableType } from '../../common/utils/types';
 
@@ -46,8 +46,8 @@ export class UserController {
 	})
 	@Post()
 	@HttpCode(HttpStatus.CREATED)
-	create(@Body() createProfileDTO: CreateUserDTO): Promise<User> {
-		return this.userService.create(createProfileDTO);
+	create(@Body() createUserArgs: CreateUserDTO): Promise<User> {
+		return this.userService.create(createUserArgs);
 	}
 
 	@SerializeOptions({

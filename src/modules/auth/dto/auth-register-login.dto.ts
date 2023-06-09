@@ -9,7 +9,7 @@ export class AuthRegisterLoginDTO {
 	@ApiProperty({ example: 'test1@example.com' })
 	@Transform(lowerCaseTransformer)
 	@Validate(IsNotExist, ['User'], {
-		message: 'emailAlreadyExists',
+		message: 'Email Taken!',
 	})
 	@IsEmail()
 	email: string;
@@ -20,9 +20,11 @@ export class AuthRegisterLoginDTO {
 
 	@ApiProperty({ example: 'John' })
 	@IsNotEmpty()
+	@MinLength(3)
 	firstName: string;
 
 	@ApiProperty({ example: 'Doe' })
 	@IsNotEmpty()
+	@MinLength(3)
 	lastName: string;
 }

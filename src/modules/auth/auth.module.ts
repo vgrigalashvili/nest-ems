@@ -9,7 +9,7 @@ import { AuthController } from './controller';
 import { UserModule } from '../user/user.module';
 import { IsExist, IsNotExist } from '../common/utils/validator';
 import { JwtStrategy } from './strategy';
-import { ForgotModule } from '../common/forgot/forgot.module';
+import { ForgotModule } from '../forgot/forgot.module';
 import { MailModule } from '../common/mail/mail.module';
 
 @Module({
