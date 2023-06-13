@@ -27,6 +27,7 @@ export class AuthService {
 	constructor(
 		private jwtService: JwtService,
 		private userService: UserService,
+
 		private forgotService: ForgotService,
 		private mailService: MailService
 	) {}
@@ -76,7 +77,6 @@ export class AuthService {
 
 		const token = this.jwtService.sign({
 			id: user.id,
-			email: user.email,
 		});
 
 		return { token, user };

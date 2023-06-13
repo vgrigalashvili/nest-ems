@@ -18,7 +18,7 @@ export class UserSeedService {
 				this.userRepo.create({
 					firstName: 'Super',
 					lastName: 'Admin',
-					email: 'lado.grigalashvili@gmail.com',
+					email: 'admin@testmail.com',
 					password: 'secret',
 					provider: 'email',
 					mail_verified: true,

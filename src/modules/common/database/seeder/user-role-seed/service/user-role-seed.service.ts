@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
 
-import { User } from '../../../../../user/entity';
-import { Role, UserRole } from '../../../../../role/entity';
+import { User, UserRole } from '../../../../../user/entity';
+import { Role } from '../../../../../role/entity';
 import { RoleEnum } from '../../../../../role/enum';
 
 @Injectable()
@@ -16,11 +16,11 @@ export class UserRoleSeedService {
 	) {}
 
 	async run() {
-		const userExists = await this.userRepo.findOne({ where: { email: 'lado.grigalashvili@gmail.com' } });
+		const userExists = await this.userRepo.findOne({ where: { email: 'admin@testmail.com' } });
 
 		if (userExists) {
-			const userId = userExists.id;
-			const roleId = `${RoleEnum.admin}`;
+			const userId: string = userExists.id;
+			const roleId: number = RoleEnum.admin;
 			await this.userRoleRepo.save(
 				this.userRoleRepo.create([
 					{

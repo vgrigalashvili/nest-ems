@@ -31,7 +31,7 @@ import { User } from '../entity';
 import { UserService } from '../service';
 
 @ApiBearerAuth()
-@Role(RoleEnum.admin)
+@Role(RoleEnum.admin, RoleEnum.user)
 @UseGuards(AuthGuard('jwt'), RoleGuard)
 @ApiTags('User')
 @Controller({

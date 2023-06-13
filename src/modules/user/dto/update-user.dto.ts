@@ -1,10 +1,9 @@
-import { PartialType } from '@nestjs/swagger';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 
 import { Transform } from 'class-transformer';
 import { IsEmail, IsOptional, MinLength, Validate } from 'class-validator';
 
-import { CreateUserDTO } from './create-user.dto';
+import { CreateUserDTO } from './';
 import { IsNotExist } from '../../common/utils/validator';
 import { lowerCaseTransformer } from '../../common/utils/transformer';
 

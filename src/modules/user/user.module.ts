@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { User } from './entity';
+import { User, UserRole } from './entity';
 
 import { IsExist, IsNotExist } from '../common/utils/validator';
 
-import { UserService } from './service';
 import { UserController } from './controller';
+import { UserService, UserRoleService } from './service';
 
 @Module({
-	imports: [TypeOrmModule.forFeature([User])],
-	providers: [IsExist, IsNotExist, UserService],
+	imports: [TypeOrmModule.forFeature([User, UserRole])],
+	providers: [IsExist, IsNotExist, UserService, UserRoleService],
 	controllers: [UserController],
-	exports: [UserService],
+	exports: [UserService, UserRoleService],
 })
 export class UserModule {}
