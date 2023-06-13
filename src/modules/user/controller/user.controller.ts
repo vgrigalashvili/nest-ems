@@ -19,7 +19,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { CreateUserDTO, UpdateUserDTO } from '../dto';
 
-import { Role } from '../../role/decorator';
+import { Roles } from '../../role/decorator';
 import { RoleEnum } from '../../role/enum';
 import { RoleGuard } from '../../role/guard';
 
@@ -31,7 +31,7 @@ import { User } from '../entity';
 import { UserService } from '../service';
 
 @ApiBearerAuth()
-@Role(RoleEnum.admin, RoleEnum.user)
+@Roles(RoleEnum.admin)
 @UseGuards(AuthGuard('jwt'), RoleGuard)
 @ApiTags('User')
 @Controller({

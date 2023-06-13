@@ -16,9 +16,9 @@ export class UserSeedService {
 		if (userCount === 0) {
 			await this.userRepo.save(
 				this.userRepo.create({
-					firstName: 'Super',
-					lastName: 'Admin',
-					email: 'admin@testmail.com',
+					firstName: 'test',
+					lastName: 'user',
+					email: 'test1@example.com',
 					password: 'secret',
 					provider: 'email',
 					mail_verified: true,

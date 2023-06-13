@@ -16,11 +16,12 @@ export class UserRoleSeedService {
 	) {}
 
 	async run() {
-		const userExists = await this.userRepo.findOne({ where: { email: 'admin@testmail.com' } });
+		const userExists = await this.userRepo.findOne({ where: { email: 'test1@example.com' } });
 
 		if (userExists) {
 			const userId: string = userExists.id;
 			const roleId: number = RoleEnum.admin;
+
 			await this.userRoleRepo.save(
 				this.userRoleRepo.create([
 					{
