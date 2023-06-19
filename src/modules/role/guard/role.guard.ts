@@ -1,7 +1,6 @@
 import { Reflector } from '@nestjs/core';
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-
-import { UserRoleService } from '../../user/service';
+import { UserRoleService } from 'src/modules/user/user-role/service';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
@@ -15,7 +14,7 @@ export class RoleGuard implements CanActivate {
 		}
 
 		const request = context.switchToHttp().getRequest();
-		const userRoles = await this.userRoleService.getUserRoles({ id: request.user.id });
+		const userRoles = await this.userRoleService.find({ id: request.user.id });
 
 		return roles.some((role) => userRoles.includes(role));
 	}

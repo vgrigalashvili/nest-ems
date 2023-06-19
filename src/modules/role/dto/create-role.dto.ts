@@ -14,7 +14,6 @@ export class CreateRoleDTO {
 	@Validate(IsNotExist, ['Role'], {
 		message: 'roleAlreadyExists',
 	})
-	@IsNotEmpty()
 	@MinLength(3)
 	name: string;
 }

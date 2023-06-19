@@ -2,8 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
 
-import { User, UserRole } from '../../../../../user/entity';
+import { User } from '../../../../../user/entity';
 import { Role } from '../../../../../role/entity';
+import { UserRole } from '../../../../../user/user-role/entity';
+
 import { RoleEnum } from '../../../../../role/enum';
 
 @Injectable()

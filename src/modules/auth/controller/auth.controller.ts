@@ -16,7 +16,7 @@ import { LoginResponseType } from '../../common/utils/types/auth';
 import { User } from '../../user/entity';
 import { NullableType } from '../../common/utils/types';
 
-@ApiTags('Auth')
+@ApiTags('auth')
 @Controller({
 	path: 'auth',
 	version: '1',

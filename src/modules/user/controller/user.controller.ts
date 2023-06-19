@@ -33,14 +33,12 @@ import { UserService } from '../service';
 @ApiBearerAuth()
 @Roles(RoleEnum.admin)
 @UseGuards(AuthGuard('jwt'), RoleGuard)
-@ApiTags('User')
-@Controller({
-	path: 'user',
-	version: '1',
-})
+@ApiTags('user')
+@Controller({ path: 'user', version: '1' })
 export class UserController {
 	constructor(private readonly userService: UserService) {}
 
+	/* create user */
 	@SerializeOptions({
 		groups: ['admin'],
 	})
@@ -50,6 +48,7 @@ export class UserController {
 		return this.userService.create(createUserArgs);
 	}
 
+	/* find all users */
 	@SerializeOptions({
 		groups: ['admin'],
 	})
@@ -72,6 +71,7 @@ export class UserController {
 		);
 	}
 
+	/* find user by id: [string] */
 	@SerializeOptions({
 		groups: ['admin'],
 	})
@@ -81,6 +81,7 @@ export class UserController {
 		return this.userService.findOne({ id: id });
 	}
 
+	/* update user details */
 	@SerializeOptions({
 		groups: ['admin'],
 	})
