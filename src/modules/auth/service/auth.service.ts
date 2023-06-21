@@ -21,12 +21,15 @@ import { LoginResponseType } from '../../common/utils/types/auth';
 import { ForgotService } from '../../forgot/service';
 import { MailService } from '../../common/mail/service';
 import { UserService } from '../../user/service';
+import { UserRoleService } from '../../user-role/service';
+import { RoleEnum } from 'src/modules/role/enum';
 
 @Injectable()
 export class AuthService {
 	constructor(
 		private jwtService: JwtService,
 		private userService: UserService,
+		private userRoleService: UserRoleService,
 
 		private forgotService: ForgotService,
 		private mailService: MailService
@@ -187,9 +190,8 @@ export class AuthService {
 		}
 
 		user.hash = null;
-		// user.status = plainToClass(Status, {
-		// 	id: StatusEnum.active,
-		// });
+		user.mail_verified = true;
+		this.userRoleService.create({ id: user.id, roles: [RoleEnum.user] });
 		await user.save();
 	}
 

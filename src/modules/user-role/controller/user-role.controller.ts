@@ -2,9 +2,9 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, SerializeOpti
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
-import { Roles } from '../../../role/decorator';
-import { RoleGuard } from '../../../role/guard';
-import { RoleEnum } from '../../../role/enum';
+import { Roles } from '../../role/decorator';
+import { RoleGuard } from '../../role/guard';
+import { RoleEnum } from '../../role/enum';
 
 import { UserRoleService } from '../service';
 import { CreateUserRoleDTO } from '../dto/create-user-role.dto';

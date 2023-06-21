@@ -4,7 +4,7 @@ import { DeepPartial, Repository } from 'typeorm';
 
 import { User } from '../../../../../user/entity';
 import { Role } from '../../../../../role/entity';
-import { UserRole } from '../../../../../user/user-role/entity';
+import { UserRole } from '../../../../../user-role/entity';
 
 import { RoleEnum } from '../../../../../role/enum';
 

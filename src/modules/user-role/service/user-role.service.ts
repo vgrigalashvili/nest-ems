@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { EntityCondition } from '../../../common/utils/types';
-// import { Role } from '../../../role/entity';
-import { User } from '../../entity';
-import { UserRole } from '../entity';
+import { EntityCondition } from '../../common/utils/types';
 import { CreateUserRoleDTO } from '../dto/create-user-role.dto';
+
+import { User } from '../../user/entity';
+import { UserRole } from '../entity';
 
 @Injectable()
 export class UserRoleService {

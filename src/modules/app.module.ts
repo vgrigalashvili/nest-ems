@@ -5,9 +5,10 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ForgotModule } from './forgot/forgot.module';
 import { RoleModule } from './role/role.module';
+import { UserRoleModule } from './user-role/user-role.module';
 
 @Module({
-	imports: [CommonModule, AuthModule, UserModule, ForgotModule, RoleModule],
+	imports: [CommonModule, AuthModule, UserModule, ForgotModule, RoleModule, UserRoleModule],
 	controllers: [],
 	providers: [],
 })

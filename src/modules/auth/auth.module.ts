@@ -11,13 +11,10 @@ import { IsExist, IsNotExist } from '../common/utils/validator';
 import { JwtStrategy } from './strategy';
 import { ForgotModule } from '../forgot/forgot.module';
 import { MailModule } from '../common/mail/mail.module';
+import { UserRoleModule } from '../user-role/user-role.module';
 
 @Module({
 	imports: [
-		UserModule,
-		ForgotModule,
-		MailModule,
-		PassportModule,
 		JwtModule.registerAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
@@ -28,6 +25,11 @@ import { MailModule } from '../common/mail/mail.module';
 				},
 			}),
 		}),
+		PassportModule,
+		UserModule,
+		ForgotModule,
+		MailModule,
+		UserRoleModule,
 	],
 	controllers: [AuthController],
 	providers: [AuthService, IsExist, IsNotExist, JwtStrategy],

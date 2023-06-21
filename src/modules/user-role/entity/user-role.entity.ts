@@ -2,9 +2,9 @@ import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Allow } from 'class-validator';
 
-import { Role } from '../../../role/entity/role.entity';
-import { User } from '../../entity';
-import { Common } from '../../../common/entity';
+import { Role } from '../../role/entity';
+import { User } from '../../user/entity';
+import { Common } from '../../common/entity';
 
 @Entity()
 export class UserRole extends Common {
