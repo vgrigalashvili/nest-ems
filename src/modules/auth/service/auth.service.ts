@@ -22,7 +22,7 @@ import { ForgotService } from '../../forgot/service';
 import { MailService } from '../../common/mail/service';
 import { UserService } from '../../user/service';
 import { UserRoleService } from '../../user-role/service';
-import { RoleEnum } from 'src/modules/role/enum';
+import { RoleEnum } from '../../role/enum';
 
 @Injectable()
 export class AuthService {
