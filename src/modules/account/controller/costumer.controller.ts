@@ -18,7 +18,7 @@ import { CostumerService } from '../service';
 @Controller({ path: 'costumer', version: '1' })
 export class CostumerController {
 	constructor(private readonly costumerService: CostumerService) {}
-	/* create user roles */
+	/* create costumer account */
 	@SerializeOptions({
 		groups: ['user'],
 	})
@@ -28,16 +28,4 @@ export class CostumerController {
 		console.log(request.user.id);
 		return this.costumerService.create({ owner_id: request.user.id });
 	}
-
-	// /* find user roles */
-	// @SerializeOptions({
-	// 	groups: ['admin'],
-	// })
-	// @Get(':id')
-	// @HttpCode(HttpStatus.OK)
-	// findMany(@Param('id') id: string): Promise<number[]> {
-	// 	return this.userRoleService.find({ id: id });
-	// }
 }
-
-// export class CostumerController {}
