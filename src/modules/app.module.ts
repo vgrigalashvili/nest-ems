@@ -6,9 +6,10 @@ import { UserModule } from './user/user.module';
 import { ForgotModule } from './forgot/forgot.module';
 import { RoleModule } from './role/role.module';
 import { UserRoleModule } from './user-role/user-role.module';
+import { AccountModule } from './account/account.module';
 
 @Module({
-	imports: [CommonModule, AuthModule, UserModule, ForgotModule, RoleModule, UserRoleModule],
+	imports: [CommonModule, AuthModule, UserModule, ForgotModule, RoleModule, UserRoleModule, AccountModule],
 	controllers: [],
 	providers: [],
 })

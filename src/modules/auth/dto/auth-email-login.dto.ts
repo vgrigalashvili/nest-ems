@@ -9,7 +9,7 @@ export class AuthEmailLoginDTO {
 	@ApiProperty({ example: 'test1@example.com' })
 	@Transform(lowerCaseTransformer)
 	@Validate(IsExist, ['User'], {
-		message: 'User with particular email address not found!',
+		message: 'User with particular email address not found!!!!!!!!!',
 	})
 	email: string;
 
