@@ -7,17 +7,18 @@ import { RoleGuard } from '../../role/guard';
 import { RoleEnum } from '../../role/enum';
 
 import { User } from '../../user/entity';
-import { Costumer } from '../entity/costumer';
+import { Costumer } from '../entity';
 
 import { CostumerService } from '../service';
 
 @ApiBearerAuth()
-@Roles(RoleEnum.user)
+@Roles(RoleEnum.user, RoleEnum.admin)
 @UseGuards(AuthGuard('jwt'), RoleGuard)
 @ApiTags('costumer')
 @Controller({ path: 'costumer', version: '1' })
 export class CostumerController {
 	constructor(private readonly costumerService: CostumerService) {}
+
 	/* create costumer account */
 	@SerializeOptions({
 		groups: ['user'],

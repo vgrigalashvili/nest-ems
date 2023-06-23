@@ -17,9 +17,7 @@ import { CreateUserRoleDTO } from '../dto/create-user-role.dto';
 export class UserRoleController {
 	constructor(private readonly userRoleService: UserRoleService) {}
 	/* create user roles */
-	@SerializeOptions({
-		groups: ['admin'],
-	})
+	@SerializeOptions({ groups: ['admin'] })
 	@Post()
 	@HttpCode(HttpStatus.OK)
 	create(@Body() createUserRoleArgs: CreateUserRoleDTO): Promise<number[]> {
@@ -27,9 +25,7 @@ export class UserRoleController {
 	}
 
 	/* find user roles */
-	@SerializeOptions({
-		groups: ['admin'],
-	})
+	@SerializeOptions({ groups: ['admin'] })
 	@Get(':id')
 	@HttpCode(HttpStatus.OK)
 	findMany(@Param('id') id: string): Promise<number[]> {

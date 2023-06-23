@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
 
 import { User } from '../../user/entity';
-import { Costumer } from '../entity/costumer';
+import { Costumer } from '../entity';
 import { CreateCostumerDTO } from '../dto';
 
 @Injectable()

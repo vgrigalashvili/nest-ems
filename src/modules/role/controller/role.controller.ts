@@ -46,9 +46,7 @@ export class RoleController {
 	}
 
 	/* find all roles */
-	@SerializeOptions({
-		groups: ['admin'],
-	})
+	@SerializeOptions({ groups: ['admin'] })
 	@Get()
 	@HttpCode(HttpStatus.OK)
 	async findAll(

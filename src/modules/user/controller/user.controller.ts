@@ -39,9 +39,7 @@ export class UserController {
 	constructor(private readonly userService: UserService) {}
 
 	/* create user */
-	@SerializeOptions({
-		groups: ['admin'],
-	})
+	@SerializeOptions({ groups: ['admin'] })
 	@Post()
 	@HttpCode(HttpStatus.CREATED)
 	create(@Body() createUserArgs: CreateUserDTO): Promise<User> {
@@ -49,9 +47,7 @@ export class UserController {
 	}
 
 	/* find all users */
-	@SerializeOptions({
-		groups: ['admin'],
-	})
+	@SerializeOptions({ groups: ['admin'] })
 	@Get()
 	@HttpCode(HttpStatus.OK)
 	async findAll(
@@ -72,9 +68,7 @@ export class UserController {
 	}
 
 	/* find user by id: [string] */
-	@SerializeOptions({
-		groups: ['admin'],
-	})
+	@SerializeOptions({ groups: ['admin'] })
 	@Get(':id')
 	@HttpCode(HttpStatus.OK)
 	findOne(@Param('id') id: string): Promise<NullableType<User>> {
@@ -82,9 +76,7 @@ export class UserController {
 	}
 
 	/* update user details */
-	@SerializeOptions({
-		groups: ['admin'],
-	})
+	@SerializeOptions({ groups: ['admin'] })
 	@Patch(':id')
 	@HttpCode(HttpStatus.OK)
 	update(@Param('id') id: string, @Body() updateUserArgs: UpdateUserDTO): Promise<User> {

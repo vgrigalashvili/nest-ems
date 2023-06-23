@@ -17,25 +17,18 @@ import { User } from '../../user/entity';
 import { NullableType } from '../../common/utils/types';
 
 @ApiTags('auth')
-@Controller({
-	path: 'auth',
-	version: '1',
-})
+@Controller({ path: 'auth', version: '1' })
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
-	@SerializeOptions({
-		groups: ['me'],
-	})
+	@SerializeOptions({ groups: ['me'] })
 	@Post('email/login')
 	@HttpCode(HttpStatus.OK)
 	public login(@Body() loginDTO: AuthEmailLoginDTO): Promise<LoginResponseType> {
 		return this.authService.validateLogin(loginDTO);
 	}
 
-	@SerializeOptions({
-		groups: ['me'],
-	})
+	@SerializeOptions({ groups: ['me'] })
 	@Post('admin/email/login')
 	@HttpCode(HttpStatus.OK)
 	public adminLogin(@Body() loginDTO: AuthEmailLoginDTO): Promise<LoginResponseType> {
@@ -67,9 +60,7 @@ export class AuthController {
 	}
 
 	@ApiBearerAuth()
-	@SerializeOptions({
-		groups: ['me'],
-	})
+	@SerializeOptions({ groups: ['me'] })
 	@Get('me')
 	@UseGuards(AuthGuard('jwt'))
 	@HttpCode(HttpStatus.OK)
@@ -78,9 +69,7 @@ export class AuthController {
 	}
 
 	@ApiBearerAuth()
-	@SerializeOptions({
-		groups: ['me'],
-	})
+	@SerializeOptions({ groups: ['me'] })
 	@Patch('me')
 	@UseGuards(AuthGuard('jwt'))
 	@HttpCode(HttpStatus.OK)

@@ -1,7 +1,7 @@
 import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Common } from '../../../common/entity';
-import { User } from '../../../user/entity';
+import { Common } from '../../common/entity';
+import { User } from '../../user/entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Min } from 'class-validator';
 
