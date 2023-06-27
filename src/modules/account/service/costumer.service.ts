@@ -1,8 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeepPartial, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
-import { User } from '../../user/entity';
 import { Costumer } from '../entity';
 import { CreateCostumerDTO } from '../dto';
 
@@ -15,10 +14,8 @@ export class CostumerService {
 
 	/* create costumer */
 	async create(costumerArgs: CreateCostumerDTO): Promise<Costumer> {
-		const user: DeepPartial<User> = { id: costumerArgs.owner_id };
-
 		try {
-			return await this.costumerRepo.save(this.costumerRepo.create({ owner_id: user }));
+			return await this.costumerRepo.save(this.costumerRepo.create(costumerArgs));
 		} catch (ex) {
 			throw new HttpException(
 				{

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Request, SerializeOptions, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, SerializeOptions, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -7,7 +7,6 @@ import { RoleGuard } from '../../role/guard';
 import { RoleEnum } from '../../role/enum';
 import { CreateCompanyDTO } from '../dto';
 
-import { User } from '../../user/entity';
 import { Company } from '../entity';
 
 import { CompanyService } from '../service';
@@ -24,9 +23,7 @@ export class CompanyController {
 	@SerializeOptions({ groups: ['user'] })
 	@Post()
 	@HttpCode(HttpStatus.CREATED)
-	create(@Request() request: Request & { user: User }, @Body() companyArgs: CreateCompanyDTO): Promise<Company> {
-		const { public_id, name } = companyArgs;
-
-		return this.companyService.create(request.user.id, { public_id: public_id, name: name });
+	create(@Body() companyArgs: CreateCompanyDTO): Promise<Company> {
+		return this.companyService.create(companyArgs);
 	}
 }

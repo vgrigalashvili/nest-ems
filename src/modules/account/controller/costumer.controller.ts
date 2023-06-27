@@ -1,4 +1,4 @@
-import { Controller, HttpCode, HttpStatus, Post, Request, SerializeOptions, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, SerializeOptions, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -6,10 +6,10 @@ import { Roles } from '../../role/decorator';
 import { RoleGuard } from '../../role/guard';
 import { RoleEnum } from '../../role/enum';
 
-import { User } from '../../user/entity';
 import { Costumer } from '../entity';
 
 import { CostumerService } from '../service';
+import { CreateCostumerDTO } from '../dto';
 
 @ApiBearerAuth()
 @Roles(RoleEnum.user, RoleEnum.admin)
@@ -25,8 +25,7 @@ export class CostumerController {
 	})
 	@Post()
 	@HttpCode(HttpStatus.CREATED)
-	create(@Request() request: Request & { user: User }): Promise<Costumer> {
-		console.log(request.user.id);
-		return this.costumerService.create({ owner_id: request.user.id });
+	create(@Body() costumerArgs: CreateCostumerDTO): Promise<Costumer> {
+		return this.costumerService.create(costumerArgs);
 	}
 }
