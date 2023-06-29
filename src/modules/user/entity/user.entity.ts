@@ -1,5 +1,4 @@
-import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, Index, PrimaryColumn } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
+import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 import * as bcrypt from 'bcryptjs';
 import { Exclude, Expose } from 'class-transformer';
@@ -9,7 +8,7 @@ import { AuthProvidersEnum } from '../../auth/enum';
 
 @Entity()
 export class User extends Common {
-	@PrimaryColumn({ type: 'uuid', default: uuidv4() })
+	@PrimaryGeneratedColumn('uuid')
 	id: string;
 
 	@Index({ unique: true })
@@ -52,6 +51,9 @@ export class User extends Common {
 
 	@BeforeInsert()
 	@BeforeUpdate()
+	logID(): void {
+		console.log(`Inserted: ${this.id}`);
+	}
 	async setPassword() {
 		if (this.previousPassword !== this.password && this.password) {
 			const salt = await bcrypt.genSalt();
