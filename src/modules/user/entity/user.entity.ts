@@ -50,11 +50,12 @@ export class User extends Common {
 	}
 
 	@BeforeInsert()
-	@BeforeUpdate()
-	logID(): void {
-		console.log(`Inserted: ${this.id}`);
+	async hashPassword(): Promise<void> {
+		const salt = await bcrypt.genSalt();
+		this.password = await bcrypt.hash(this.password, salt);
 	}
-	async setPassword() {
+	@BeforeUpdate()
+	async setPassword(): Promise<void> {
 		if (this.previousPassword !== this.password && this.password) {
 			const salt = await bcrypt.genSalt();
 			this.password = await bcrypt.hash(this.password, salt);
