@@ -81,8 +81,8 @@ export class AuthService {
 		const token = this.jwtService.sign({
 			id: user.id,
 		});
-
-		return { token, user };
+		user.id;
+		return { user_id: user.id, token };
 	}
 
 	async register(registerArgs: AuthRegisterLoginDTO): Promise<void> {
