@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Allow } from 'class-validator';
 
@@ -7,6 +7,7 @@ import { User } from '../../user/entity';
 import { Common } from '../../common/entity';
 
 @Entity()
+@Unique(['user_id', 'role_id'])
 export class UserRole extends Common {
 	@ApiProperty({ example: 1 })
 	@PrimaryGeneratedColumn()

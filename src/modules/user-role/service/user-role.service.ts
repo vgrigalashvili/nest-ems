@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { EntityCondition } from '../../common/utils/types';
-import { CreateUserRoleDTO } from '../dto/create-user-role.dto';
+import { CreateUserRoleDTO } from '../dto';
 
 import { User } from '../../user/entity';
 import { UserRole } from '../entity';
@@ -20,10 +20,22 @@ export class UserRoleService {
 		const { id, roles } = userRoleArgs;
 
 		// Find the existing roles for the user
-		const existingRoles = await this.find({ id: id });
+		const existingRoles = await this.findUserRoles({ id: id });
 
 		// Filter out the roles that already exist for the user
 		const newRoles = roles.filter((roleId) => !existingRoles.includes(roleId));
+
+		if (!newRoles.length) {
+			throw new HttpException(
+				{
+					status: HttpStatus.UNPROCESSABLE_ENTITY,
+					errors: {
+						user_role: 'It appears that the user already has the roles you provided for adding!',
+					},
+				},
+				HttpStatus.UNPROCESSABLE_ENTITY
+			);
+		}
 
 		// Create new UserRole entities for the new roles and save them to the database
 		for (const roleId of newRoles) {
@@ -33,11 +45,11 @@ export class UserRoleService {
 
 			await this.userRoleRepo.save(this.userRoleRepo.create(userRole));
 		}
-		return this.find({ id: id });
+		return this.findUserRoles({ id: id });
 	}
 
 	/* find all user roles */
-	async find(fields: EntityCondition<User>): Promise<number[]> {
+	async findUserRoles(fields: EntityCondition<User>): Promise<number[]> {
 		const { id } = fields;
 
 		const userRoles = await this.userRoleRepo.find({
