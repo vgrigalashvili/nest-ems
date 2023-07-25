@@ -8,6 +8,7 @@ import { RoleEnum } from '../../role/enum';
 
 import { UserRoleService } from '../service';
 import { CreateUserRoleDTO } from '../dto/create-user-role.dto';
+// import { UpdateUserRoleDTO } from '../dto';
 
 @ApiBearerAuth()
 @Roles(RoleEnum.admin)
@@ -29,6 +30,6 @@ export class UserRoleController {
 	@Get(':id')
 	@HttpCode(HttpStatus.OK)
 	findMany(@Param('id') id: string): Promise<number[]> {
-		return this.userRoleService.find({ id: id });
+		return this.userRoleService.findUserRoles({ id: id });
 	}
 }
