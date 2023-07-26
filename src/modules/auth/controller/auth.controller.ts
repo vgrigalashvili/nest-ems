@@ -25,14 +25,14 @@ export class AuthController {
 	@Post('email/login')
 	@HttpCode(HttpStatus.OK)
 	public login(@Body() loginDTO: AuthEmailLoginDTO): Promise<LoginResponseType> {
-		return this.authService.validateLogin(loginDTO);
+		return this.authService.validateLogin(loginDTO, false);
 	}
 
 	@SerializeOptions({ groups: ['me'] })
 	@Post('admin/email/login')
 	@HttpCode(HttpStatus.OK)
 	public adminLogin(@Body() loginDTO: AuthEmailLoginDTO): Promise<LoginResponseType> {
-		return this.authService.validateLogin(loginDTO);
+		return this.authService.validateLogin(loginDTO, true);
 	}
 
 	@Post('email/register')

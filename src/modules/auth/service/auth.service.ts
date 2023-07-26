@@ -11,6 +11,7 @@ import { User } from '../../user/entity';
 
 import { AuthEmailLoginDTO, AuthUpdateDTO, AuthRegisterLoginDTO } from '../dto';
 
+import { RoleEnum } from '../../role/enum';
 // import { RoleEnum } from '../../common/role/enum';
 // import { StatusEnum } from '../../common/status';
 
@@ -18,11 +19,11 @@ import { AuthProvidersEnum } from '../enum';
 
 import { NullableType } from '../../common/utils/types';
 import { LoginResponseType } from '../../common/utils/types/auth';
+
 import { ForgotService } from '../../forgot/service';
 import { MailService } from '../../common/mail/service';
 import { UserService } from '../../user/service';
 import { UserRoleService } from '../../user-role/service';
-import { RoleEnum } from '../../role/enum';
 
 @Injectable()
 export class AuthService {
@@ -30,12 +31,11 @@ export class AuthService {
 		private jwtService: JwtService,
 		private userService: UserService,
 		private userRoleService: UserRoleService,
-
 		private forgotService: ForgotService,
 		private mailService: MailService
 	) {}
 
-	async validateLogin(loginDTO: AuthEmailLoginDTO): Promise<LoginResponseType> {
+	async validateLogin(loginDTO: AuthEmailLoginDTO, onlyAdmin: boolean): Promise<LoginResponseType> {
 		const user = await this.userService.findOne({
 			email: loginDTO.email,
 		});
@@ -51,6 +51,21 @@ export class AuthService {
 				HttpStatus.UNPROCESSABLE_ENTITY
 			);
 		}
+
+		const userRoles = await this.userRoleService.findUserRoles({ id: user.id });
+
+		if (onlyAdmin && !userRoles.includes(RoleEnum.admin)) {
+			throw new HttpException(
+				{
+					status: HttpStatus.FORBIDDEN,
+					errors: {
+						user_role: 'You do not have permission to access this resource!',
+					},
+				},
+				HttpStatus.FORBIDDEN
+			);
+		}
+		console.log('userRoles: ', userRoles, onlyAdmin);
 
 		if (user.provider !== AuthProvidersEnum.email) {
 			throw new HttpException(
@@ -81,8 +96,7 @@ export class AuthService {
 		const token = this.jwtService.sign({
 			id: user.id,
 		});
-		user.id;
-		return { user_id: user.id, token };
+		return { user_id: user.id, roles: userRoles, token };
 	}
 
 	async register(registerArgs: AuthRegisterLoginDTO): Promise<void> {
